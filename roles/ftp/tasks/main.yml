@@ -1,0 +1,11 @@
+---
+- name: install vsftpd
+  apt:
+    name: vsftpd
+    update_cache: yes
+
+- name: configure vsftpd
+  template:
+    src: vsftpd.conf.j2
+    dest: /etc/vsftpd.conf
+  notify: restart vsftpd

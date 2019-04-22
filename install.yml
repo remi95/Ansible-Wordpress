@@ -1,0 +1,22 @@
+---
+
+- name: install ftp and web server
+  hosts: web
+  become: true
+  pre_tasks:
+    - name: update apt cache
+      apt:
+        update_cache: true
+  roles:
+    - ftp
+    - apache
+
+- name: install database
+  hosts: db
+  become: true
+  pre_tasks:
+    - name: update apt cache
+      apt:
+        update_cache: true
+  roles:
+    - mysql

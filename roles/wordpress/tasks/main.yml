@@ -1,0 +1,13 @@
+---
+- name: Download wordpress
+  unarchive:
+    src: https://fr.wordpress.org/latest-fr_FR.tar.gz
+    dest: "{{directory}}"
+    remote_src: yes
+    extra_opts:
+    - --strip-components=1
+
+- name: send config
+  template:
+    src=wp-config.j2
+    dest="{{directory}}/wp-config.php"

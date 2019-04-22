@@ -1,0 +1,16 @@
+---
+- name: install mysql
+  apt:
+    name={{item}}
+  with_items:
+    - mysql-server
+    - python-mysqldb
+
+- name: Create user for mysql with all right
+  mysql_user:
+    name={{ database_username }}
+    password={{ database_password }}
+    priv='*.*:ALL,GRANT'
+    state=present
+  notify:
+    - restart mysql

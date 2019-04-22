@@ -1,0 +1,57 @@
+# Nous voulons que le serveur fonctionne en mode standalone
+listen=YES
+listen_ipv6=NO
+#
+# On ne veut surtout pas de connexions en mode anonymous
+anonymous_enable=NO
+#
+# On veut que les utilisateurs locaux puissent se connecter
+local_enable=YES
+#
+# On veut que les utilisateurs puissent remonter des fichiers sur le serveur
+write_enable=YES
+#
+# On fixe le masque local a 022 (les fichiers remontés auront des droits en 755)
+local_umask=022
+#
+# On interdit l’upload anonyme
+anon_upload_enable=NO
+#
+# Idem pour la creation de repertoires
+anon_mkdir_write_enable=NO
+#
+# On demande a ce que les actions des utilisateurs soient loggees
+xferlog_enable=YES
+#
+# On verifie que la commande PORT provienne bien du port 20 de la machine cliente
+connect_from_port_20=YES
+#
+# Les logs seront enregistres dans le fichier /var/log/vsftpd.log
+xferlog_file=/var/log/vsftpd.log
+#
+# On declare les valeurs de timeout. Celles fournies par defaut sont ok pour notre utilisation
+idle_session_timeout=300
+data_connection_timeout=120
+connect_timeout=60
+accept_timeout=60
+#
+# Par securite, on interdit la commande ABOR
+async_abor_enable=NO
+#
+# Les transferts en ASCII sont souvent source de confusions
+ascii_upload_enable=NO
+ascii_download_enable=NO
+#
+# Par securite, on change la banniere (ne pas y écrire des caractères UTF8 comme des accents par exemple)
+ftpd_banner=Bienvenue sur le serveur !!!
+#
+# On veut limiter les utilisateurs a leur repertoire
+chroot_local_user=YES
+chroot_list_enable=NO
+allow_writeable_chroot=YES
+# (default follows)
+#chroot_list_file=/etc/vsftpd.chroot_list
+
+#
+# Les heures d’enregistrement des fichiers seront affichees a l’heure locale
+use_localtime=YES

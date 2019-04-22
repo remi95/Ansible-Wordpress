@@ -1,0 +1,4 @@
+database_username: user
+database_password: pass
+database_name: dbname
+database_host: 0.0.0.0

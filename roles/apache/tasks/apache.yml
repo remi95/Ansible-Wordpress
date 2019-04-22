@@ -1,0 +1,50 @@
+---
+- name: Install apache & modules
+  apt: name={{item}} state=present
+  with_items:
+    - apache2
+    - libapache2-mod-php7.2
+
+- name: Create websites directory
+  file:
+    path={{directory}}
+    state=directory
+
+- name: Enabled mod_rewrite
+  apache2_module: name=rewrite state=present
+  notify:
+    - reload apache
+
+- name: Add the good user to the group 'www-data'
+  user:
+    name: "{{user}}"
+    groups: www-data
+    append: yes
+
+- name: Use local template for virtualhost on webserver
+  template:
+    src=vhost.conf.j2
+    dest=/etc/apache2/sites-available/{{servername}}.conf
+  notify:
+    - reload apache
+
+- name: Remove default apache virtualhost
+  file:
+    path=/etc/apache2/sites-enabled/000-default.conf
+    state=absent
+  notify:
+    - reload apache
+
+- name: Enable virtualhosts
+  file:
+    src=/etc/apache2/sites-available/{{servername}}.conf
+    dest=/etc/apache2/sites-enabled/{{servername}}.conf
+    state=link
+  notify:
+    - reload apache
+
+- name: Add servernames in hosts
+  lineinfile:
+    dest: /etc/hosts
+    state: present
+    line: "127.0.0.1 {{servername}}"
