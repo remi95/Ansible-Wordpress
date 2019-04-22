@@ -5,3 +5,9 @@
   become: true
   roles:
     - wordpress
+
+- name: install database
+  hosts: db
+  become: true
+  roles:
+    - database

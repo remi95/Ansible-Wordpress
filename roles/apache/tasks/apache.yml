@@ -4,6 +4,7 @@
   with_items:
     - apache2
     - libapache2-mod-php7.2
+    - mysql-client
 
 - name: Create websites directory
   file:

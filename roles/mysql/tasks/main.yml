@@ -11,6 +11,7 @@
     name={{ database_username }}
     password={{ database_password }}
     priv='*.*:ALL,GRANT'
+    host={{ server_host }}
     state=present
   notify:
     - restart mysql

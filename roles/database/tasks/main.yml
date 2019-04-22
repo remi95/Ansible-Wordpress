@@ -1,0 +1,11 @@
+---
+- name: Copy database dump file
+  copy:
+    src: "{{ dump_filename }}"
+    dest: /tmp
+
+- name: Import wordpress database
+  mysql_db:
+    state: import
+    name: "{{ database_name }}"
+    target: /tmp/{{ dump_filename }}

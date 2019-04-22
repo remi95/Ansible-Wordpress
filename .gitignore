@@ -2,3 +2,4 @@
 group_vars/*.yml
 group_vars/*/*.yml
 ansible.cfg
+roles/*/files/
