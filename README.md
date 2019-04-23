@@ -4,6 +4,10 @@
 
 This is a school project. I've write **Ansible** script to install _Apache_ server with _PHP_ and _mySql_ database, and another script to install a _Wordpress_ website.
 
+## Requirements
+
+You need to have **Ansible** installed on your local host, and **two remote server**, using Linux (write and test for _Ubuntu_, with _Azure_ vms), one for webserver and one for database. Note public and private ips.
+
 ## Installation
 
 1. `git clone https://github.com/remi95/Ansible-Wordpress.git`
@@ -13,8 +17,10 @@ This is a school project. I've write **Ansible** script to install _Apache_ serv
 
 ## Configuration
 
-Set your servers ips in `group_vars/db/vm.machine2.yml` and `group_vars/web/vm.machine1.yml`, after the `ansible_host` key.
+:exclamation: Firstly, you need to set your variables.
+Edit next files, using parameters on **.dist** files:
+- `group_vars/all.yml`
+- `group_vars/web/vm.machine1.yml`
+- `group_vars/db/vm.machine2.yml`
 
-All database configurations are in `group_vars/all.yml` file.
-
-If you want to send a `dump.sql` file to import your database during the deployment, put it on `roles/database/files`, and set the filename after the `dump_filename` key of the _db vars file_.
+:grey_exclamation: If you want to send a `dump.sql` file  with your wordpress database, put it on `roles/database/files/<dump_filename>.sql`. Don't forget to set this filename on `group_vars/db/vm.machine1.yml`.

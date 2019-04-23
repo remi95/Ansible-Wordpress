@@ -2,4 +2,6 @@ database_username: user
 database_password: pass
 database_name: dbname
 database_host: 0.0.0.0
+database_host_private: 0.0.0.0
 server_host: 0.0.0.0
+server_host_private: 0.0.0.0
